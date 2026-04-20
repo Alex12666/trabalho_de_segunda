@@ -1,0 +1,20 @@
+name: automatizando terraform
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest # Liga a máquina Linux
+
+    steps:
+      - name: baixa codico
+        uses: actions/checkout@v4 # Usa a ferramenta pronta para copiar seus arquivos
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform # Entra na pasta onde estão seus arquivos .tf
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
