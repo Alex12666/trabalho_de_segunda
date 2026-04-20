@@ -10,17 +10,17 @@ jobs:
 
     steps:
       - name: baixa codigo
-        uses: actions/checkout@v4 
+        uses: actions/checkout@v4 # Copia seus arquivos .tf para a VM
 
-      # PASSO NOVO: Instala o Terraform na máquina virtual
       - name: Instalar Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v3 # Instala o executável na VM
         with:
           terraform_version: "1.7.0"
 
       - name: Terraform Init
         run: terraform init
-        working-directory: ./terraform
+        working-directory: ./terraform # Entra na pasta certa
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "us-east-2" # Ajuda o Terraform a achar o S3
