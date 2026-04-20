@@ -6,11 +6,17 @@ on:
 
 jobs:
   teste:
-    runs-on: ubuntu-latest # Liga a máquina Linux
+    runs-on: ubuntu-latest
 
     steps:
-      - name: baixa codico
+      - name: baixa codigo
         uses: actions/checkout@v4 
+
+      # PASSO NOVO: Instala o Terraform na máquina virtual
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
 
       - name: Terraform Init
         run: terraform init
